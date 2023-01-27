@@ -1,5 +1,11 @@
 # algorithm
-알고리즘 문제 풀이
+- 알고리즘 문제 풀이
+
+## 목표
+- 매일 꾸준히 문제 풀기
+- 백준 골드 달성
+
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=okip0428)](https://solved.ac/okip0428/)
 
 ## commit 규칙
 - **형식**: `Keyword` : 출처 난이도 제목
