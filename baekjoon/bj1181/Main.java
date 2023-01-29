@@ -21,8 +21,10 @@ public class Main {
             arr[i] = br.readLine();
         }
 
+        //길이가 짧은 것부터 정렬 후 사전 순으로 정렬
         Arrays.sort(arr, Comparator.comparingInt((String s) -> s.length()).thenComparing((String s) -> s.toString()));
 
+        //중복 제거
         int size = 0;
         for (int i = 0; i < N-1; i++) {
             if (!arr[i].equals(arr[i + 1])) {
@@ -32,6 +34,7 @@ public class Main {
         arr[size++] = arr[arr.length - 1];
         arr = Arrays.copyOf(arr, size);
 
+        //출력
         for (int i = 0; i < arr.length; i++) {
             bw.write(arr[i] + "\n");
         }
