@@ -2,6 +2,7 @@ package bj11650;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -24,23 +25,8 @@ public class Main {
             }
         }
 
-        //x좌표를 기준으로 정렬 후 같은 경우 y좌표가 작은 값을 앞으로 정렬
-        for (int i = 0; i < arr.length; i++) {
-            int minIdx = i;
-            for (int j = i+1; j < arr.length; j++) {
-                if (arr[minIdx][0] > arr[j][0]) {
-                    minIdx = j;
-                } else if (arr[minIdx][0] == arr[j][0]) {
-                    if (arr[minIdx][1] > arr[j][1]) {
-                        minIdx = j;
-                    }
-                }
-            }
-            //정렬 순서 변경
-            int[] temp = arr[i];
-            arr[i] = arr[minIdx];
-            arr[minIdx] = temp;
-        }
+        //Comparator 사용
+        Arrays.sort(arr, Comparator.comparingInt((int[] o) -> o[0]).thenComparingInt((int[] o) -> o[1]));
 
         //출력
         for (int i = 0; i < arr.length; i++) {
