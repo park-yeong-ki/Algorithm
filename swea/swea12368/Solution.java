@@ -7,7 +7,7 @@ public class Solution {
 		//Scanner 생성
 		Scanner sc = new Scanner(System.in);
 		
-		//테스트 케이스 입력
+		//테스트 케이스 T입력
 		int T = sc.nextInt();
 		
 		for (int test_case = 1; test_case <= T; test_case++) {
