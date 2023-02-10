@@ -19,8 +19,8 @@ public class Solution {
             char[] cArr = sc.next().toCharArray();
 
             //여는 괄호와 닫는 괄호에 대한 배열 생성
-            char[] open = {'{', '[', '('};
-            char[] close = {'}', ']', ')'};
+            char[] open = {'{', '[', '(', '<'};
+            char[] close = {'}', ']', ')', '>'};
 
             //초기값은 유효하다고 설정
             int result = 1;
@@ -39,6 +39,11 @@ public class Solution {
                         }
                     }
                 }
+            }
+
+            //입력된 문자열의 길이만큼 반복을 완료한 경우 스택이 비워져있지 않으면 총 괄호의 짝이 일치하지 않은 것
+            if (result == 1 && stack.size() != 0) {
+                result = 0;
             }
 
             //출력
