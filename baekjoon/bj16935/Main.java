@@ -88,11 +88,11 @@ public class Main {
                     for (int i = 0; i < arr.length/2; i++) {
                         for (int j = 0; j < arr[0].length/2; j++) {
                             //1번 -> 2번
-                            arrPR[i+arr.length/2][j] = arr[i+arr.length/2][j+arr[0].length/2];
+                            arrPR[i][j+arr[0].length/2] = arr[i][j];
                             //2번 -> 3번
                             arrPR[i+arr.length/2][j+arr[0].length/2] = arr[i][j+arr[0].length/2];
                             //3번 -> 4번
-                            arrPR[i][j+arr[0].length/2] = arr[i][j];
+                            arrPR[i+arr.length/2][j] = arr[i+arr.length/2][j+arr[0].length/2];
                             //4번 -> 1번
                             arrPR[i][j] = arr[i+arr.length/2][j];
                         }
@@ -105,13 +105,13 @@ public class Main {
                     int[][] arrPL = new int[arr.length][arr[0].length];
                     for (int i = 0; i < arr.length/2; i++) {
                         for (int j = 0; j < arr[0].length/2; j++) {
-                            //1번 -> 2번
+                            //1번 -> 4번
                             arrPL[i+arr.length/2][j] = arr[i][j];
-                            //2번 -> 3번
+                            //4번 -> 3번
                             arrPL[i+arr.length/2][j+arr[0].length/2] = arr[i+arr.length/2][j];
-                            //3번 -> 4번
+                            //3번 -> 2번
                             arrPL[i][j+arr[0].length/2] = arr[i+arr.length/2][j+arr[0].length/2];
-                            //4번 -> 1번
+                            //2번 -> 1번
                             arrPL[i][j] = arr[i][j+arr[0].length/2];
                         }
                     }
