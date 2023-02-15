@@ -97,7 +97,7 @@ public class Main {
                             arrPR[i][j] = arr[i+arr.length/2][j];
                         }
                     }
-                    //배열의 얇은 복사
+                    //배열의 얕은 복사
                     arr = arrPR;
                     break;
                 //4개의 부분 배열로 나눈후 시계반대방향 회전
@@ -115,7 +115,7 @@ public class Main {
                             arrPL[i][j] = arr[i][j+arr[0].length/2];
                         }
                     }
-                    //배열의 얇은 복사
+                    //배열의 얕은 복사
                     arr = arrPL;
                     break;
                 default:
