@@ -82,7 +82,7 @@ public class Main {
                 int y2 = permRcs[i][1] + permRcs[i][2];
 
                 int m = 0;
-                while(m < (x2-x1)/2 && m < (y2-y1)/2) {
+                while(m < (x2-x1+1)/2 && m < (y2-y1+1)/2) {
                     //가장 윗행 이동하기
                     //우측 상단 모서리 부분 임시값 저장
                     int temp1 = arr[x1+m][y2-m];
