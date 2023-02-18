@@ -1,7 +1,6 @@
 package bj2023;
 
 import java.io.*;
-import java.util.List;
 
 public class Main {
     //전역변수 설정
