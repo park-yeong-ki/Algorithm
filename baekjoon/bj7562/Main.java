@@ -9,6 +9,8 @@ public class Main {
     //전역변수 설정
     static int l;
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static int[] dx = {-2, -1, 1, 2, 2, 1, -1, -2};
+    static int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -54,7 +56,6 @@ public class Main {
         //큐가 비어있을 때까지 반복
         int[] current;
         int size, r, c, cnt = 0;
-        int[][] knight;
         while (!queue.isEmpty()) {
             size = queue.size();
 
@@ -70,18 +71,12 @@ public class Main {
                     return;
                 }
 
-                //나이트를 인접 정점으로 생각하고 각 경우를 설정
-                knight = new int[][]{new int[]{r - 2, c + 1}, new int[]{r - 1, c + 2},
-                        new int[]{r - 1, c - 2}, new int[]{r - 2, c - 1},
-                        new int[]{r + 1, c - 2}, new int[]{r + 2, c - 1},
-                        new int[]{r + 2, c + 1}, new int[]{r + 1, c + 2}};
-
                 //방문하지 않은 정점이면 큐에 넣고 방문 체크한다
                 for (int j = 0; j < 8; j++) {
-                    if (knight[j][0] >= 0 && knight[j][0] < l && knight[j][1] >= 0 && knight[j][1] < l) {
-                        if (!visited[knight[j][0]][knight[j][1]]) {
-                            queue.offer(new int[]{knight[j][0], knight[j][1]});
-                            visited[knight[j][0]][knight[j][1]] = true;
+                    if (r + dx[j] >= 0 && r + dx[j] < l && c + dy[j] >= 0 && c + dy[j] < l) {
+                        if (!visited[r+dx[j]][c+dy[j]]) {
+                            queue.offer(new int[]{r+dx[j], c+dy[j]});
+                            visited[r+dx[j]][c+dy[j]] = true;
                         }
                     }
                 }
