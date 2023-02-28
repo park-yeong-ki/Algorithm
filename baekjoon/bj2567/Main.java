@@ -44,7 +44,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             int col = cPaper[i][0];
             int row = l - 1 - cPaper[i][1];
-            //가로 길이 계산학기
+            //가로 길이 계산하기
             for (int j = col; j < col+10; j++) {
                 //상하 탐색해서 흰 공간이 보이면 카운트
                 for (int k = 0; k < 2; k++) {
