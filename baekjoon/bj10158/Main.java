@@ -29,14 +29,14 @@ public class Main {
         int x = 1;
         for (int i = 0; i < dp; i++) {
             //p가 벽에 부딪힐 경우 방향을 바꿔준다.
-            if (p == w || p == 0) x *= -1;
+            if (p + x > w || p + x < 0) x *= -1;
             p += x;
         }
 
         int y = 1;
         for (int i = 0; i < dq; i++) {
             //q가 벽에 부딪힐 경우 방향을 바꿔준다.
-            if (q == h || q == 0) y *= -1;
+            if (q + y > h || q + y < 0) y *= -1;
             q += y;
         }
 
