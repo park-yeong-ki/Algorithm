@@ -23,7 +23,6 @@ public class Main_2 {
     }
     static int V;
     static ArrayList<Edge>[] adjList;
-    static int result;
     static int[] dist;
     static int INF = Integer.MAX_VALUE;
 
