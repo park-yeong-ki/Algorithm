@@ -3,6 +3,7 @@ package bj17281;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -11,6 +12,8 @@ public class Main {
     static int[][] arr;
     static int[] hitter;
     static int max = Integer.MIN_VALUE;
+    static boolean[] base = new boolean[4];
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -38,7 +41,7 @@ public class Main {
             int score = 0;
             for (int i = 0; i < N; i++) {
                 int out = 0;
-                boolean[] base = new boolean[4];
+                Arrays.fill(base, false);
                 while (out < 3) {
                     switch (arr[i][hitter[next]]) {
                         case 0:
