@@ -10,12 +10,13 @@ import java.util.StringTokenizer;
 public class Main {
     static char[][] board;
     static class ball {
-        int rR, rC, bR, bC;
-        public ball(int rR, int rC, int bR, int bC) {
+        int rR, rC, bR, bC, exDir;
+        public ball(int rR, int rC, int bR, int bC, int exDir) {
             this.rR = rR;
             this.rC = rC;
             this.bR = bR;
             this.bC = bC;
+            this.exDir = exDir;
         }
     }
     static ball start;
@@ -60,13 +61,20 @@ public class Main {
                     trC = current.rC;
                     tbR = current.bR;
                     tbC = current.bC;
-                    if (j == 0 && trC == tbC && trR < tbR) { //상
+
+                    //이전에 왔던 방향인 경우는 통과한다.
+                    if (j == current.exDir) continue;
+                    //이전에 왔던 방향과 반대인 경우도 통과한다.
+                    if (current.exDir % 2 == 0 && current.exDir + 1 == j) continue;
+                    if (current.exDir % 2 == 1 && current.exDir - 1 == j) continue;
+
+                    if (j == 0 && trC == tbC && trR < tbR) {
                         moveRed(j);
                         moveBlue(j);
-                    } else if (j == 0 && trC == tbC && trR > tbR) { //상
+                    } else if (j == 0 && trC == tbC && trR > tbR) {
                         moveBlue(j);
                         moveRed(j);
-                    } else if (j == 1 && trC == tbC && trR > tbR) { //하
+                    } else if (j == 1 && trC == tbC && trR > tbR) {
                         moveRed(j);
                         moveBlue(j);
                     } else if (j == 1 && trC == tbC && trR < tbR) {
@@ -89,7 +97,7 @@ public class Main {
                         moveBlue(j);
                     }
 
-                    queue.add(new ball(trR, trC, tbR, tbC));
+                    queue.add(new ball(trR, trC, tbR, tbC, j));
                 }
             }
             cnt++;
@@ -126,7 +134,6 @@ public class Main {
         }
     }
 
-
     static void input() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -151,6 +158,6 @@ public class Main {
                 }
             }
         }
-        start = new ball(rR, rC, bR, bC);
+        start = new ball(rR, rC, bR, bC, -1);
     }
 }
