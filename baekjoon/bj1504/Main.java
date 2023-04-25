@@ -27,23 +27,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
         input();
         int result = -1;
-        d = 0;
-        if (dijkstra(1, num1)) {
-            if (dijkstra(num1, num2)) {
-                if (dijkstra(num2, N)) {
-                    result = d;
-                }
-            }
-        }
 
         d = 0;
-        if (dijkstra(1, num2)) {
-            if (dijkstra(num2, num1)) {
-                if (dijkstra(num1, N)) {
-                    if (result != -1) result = Math.min(result, d);
-                    else result = d;
-                }
-            }
+        if (dijkstra(1, num1) && dijkstra(num1, num2) && dijkstra(num2, N)) {
+            result = d;
+        }
+        d = 0;
+        if (dijkstra(1, num2) && dijkstra(num2, num1) && dijkstra(num1, N)) {
+            if (result != -1) result = Math.min(result, d);
+            else result = d;
         }
 
         System.out.println(result);
