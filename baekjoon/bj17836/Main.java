@@ -45,9 +45,7 @@ public class Main {
             for (int s = 0; s < size; s++) {
                 current = queue.poll();
 
-                if (time > T) {
-                    return;
-                }
+                if (time > T) return;
 
                 if (current.r == N && current.c == M) {
                     result = time;
@@ -60,18 +58,13 @@ public class Main {
 
                     if (tR >= 1 && tR <= N && tC >= 1 && tC <= M) {
                         if (!visited[tR][tC][current.g]) {
-                            if (map[tR][tC] == 0) {
+                            if (map[tR][tC] == 0 || (map[tR][tC] == 1 && current.g == 1)) {
                                 queue.add(new Node(tR, tC, current.g));
                                 visited[tR][tC][current.g] = true;
                             } else if (map[tR][tC] == 2) {
                                 queue.add(new Node(tR, tC, 1));
                                 visited[tR][tC][current.g] = true;
                                 visited[tR][tC][1] = true;
-                            } else {
-                                if (current.g == 1) {
-                                    queue.add(new Node(tR, tC, current.g));
-                                    visited[tR][tC][current.g] = true;
-                                }
                             }
                         }
                     }
