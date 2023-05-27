@@ -4,7 +4,6 @@
 ## 목표
 - 매일 꾸준히 문제 풀기
 - 백준 플래티넘 달성하기
-- SW 역량테스트 A형 취득하기
 
 [![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=okip0428)](https://solved.ac/okip0428/)
 
