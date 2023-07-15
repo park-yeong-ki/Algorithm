@@ -1,7 +1,5 @@
 package bj1174;
 
-import com.sun.org.apache.xpath.internal.operations.Neg;
-
 import java.util.Scanner;
 
 public class Main {
