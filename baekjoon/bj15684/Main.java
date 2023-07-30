@@ -11,11 +11,11 @@ public class Main {
     static boolean flag;
     public static void main(String[] args) throws IOException {
         input();
-        dfs(0);
+        dfs(0, 1);
         System.out.println(min == Integer.MAX_VALUE ? -1 : min);
     }
 
-    static void dfs(int cnt) {
+    static void dfs(int cnt, int row) {
         if (isPossible()) {
             min = Math.min(min, cnt);
             return;
@@ -25,11 +25,11 @@ public class Main {
             return;
         }
 
-        for (int i = 1; i <= H; i++) {
+        for (int i = row; i <= H; i++) {
             for (int j = 1; j <= N - 1; j++) {
                 if (rowLine[i][j] || rowLine[i][j-1] || rowLine[i][j+1]) continue;
                 rowLine[i][j] = true;
-                dfs(cnt + 1);
+                dfs(cnt + 1, i);
                 rowLine[i][j] = false;
             }
         }
