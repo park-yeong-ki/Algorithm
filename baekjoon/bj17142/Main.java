@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    static int N, M, ans;
+    static int N, M, ans, total;
     static int[][] map;
     static class Point{
         int r, c;
@@ -28,15 +28,14 @@ public class Main {
         System.out.println(ans == Integer.MAX_VALUE ? -1 : ans);
     }
 
-    static boolean isCompleted(boolean[][] visited) {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (map[i][j] == 1) continue;
-                if (map[i][j] == 0 && !visited[i][j]) return false;
-            }
+    static boolean isCompleted(int cnt, boolean[][] visited) {
+        int check = cnt;
+        for (Point virus : virusList) {
+            if (!visited[virus.r][virus.c]) check++;
         }
 
-        return true;
+        if (check == total) return true;
+        else return false;
     }
 
     static void bfs() {
@@ -53,11 +52,12 @@ public class Main {
         Point current;
         int size;
         int time = 0;
+        int cnt = M;
         while (!queue.isEmpty()) {
             size = queue.size();
 
             if (ans <= time) return;
-            if (isCompleted(visited)) {
+            if (isCompleted(cnt, visited)) {
                 ans = Math.min(ans, time);
                 return;
             }
@@ -75,6 +75,7 @@ public class Main {
 
                     queue.add(new Point(tR, tC));
                     visited[tR][tC] = true;
+                    cnt++;
                 }
             }
             time++;
@@ -105,11 +106,13 @@ public class Main {
 
         map = new int[N][N];
         virusList = new ArrayList<>();
+        total = N * N;
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
                 if (map[i][j] == 2) virusList.add(new Point(i, j));
+                if (map[i][j] == 1) total--;
             }
         }
 
