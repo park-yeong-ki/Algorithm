@@ -13,7 +13,6 @@ public class Main {
     static int[][] rot;
     static int[] dr = {-1, 1, 0, 0};
     static int[] dc = {0, 0, -1, 1};
-    static boolean[][] visited;
     static boolean flag;
 
     static class Point {
@@ -34,11 +33,9 @@ public class Main {
 
             moveCircle(x, d, k);
 
-            visited = new boolean[N][M];
             flag = true;
             for (int j = 0; j < N; j++) {
                 for (int l = 0; l < M; l++) {
-                    if (visited[j][l]) continue;
                     if (map[j][l] == 0) continue;
                     bfs(new Point(j, l));
                 }
@@ -83,7 +80,6 @@ public class Main {
         Queue<Point> queue = new ArrayDeque<>();
 
         queue.add(start);
-        visited[start.r][start.c] = true;
 
         Point current;
         int size;
@@ -104,11 +100,10 @@ public class Main {
                     if (tC < 0) tC = M - 1;
                     if (tC >= M) tC = 0;
 
+                    if (map[tR][tC] == 0) continue;
                     if (num != map[tR][tC]) continue;
-                    if (visited[tR][tC]) continue;
 
                     queue.add(new Point(tR, tC));
-                    visited[tR][tC] = true;
                     map[current.r][current.c] = 0;
                     flag = false;
                 }
