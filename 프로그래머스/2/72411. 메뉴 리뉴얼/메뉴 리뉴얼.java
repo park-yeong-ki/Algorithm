@@ -59,8 +59,6 @@ class Solution {
                     list.add(new String[]{String.valueOf(cnt), current});
                     count[current.length()] = Math.max(count[current.length()], cnt);
                 } 
-                
-                sb.setLength(0);
             }
         }
         
@@ -80,12 +78,7 @@ class Solution {
         
         Collections.sort(ans);
         
-        String[] answer = new String[ans.size()];
-        for(int i=0; i<ans.size(); i++){
-            answer[i] = ans.get(i);
-        }
-        
-        return answer;
+        return ans.toArray(new String[0]);
     }
     
     static void subset(int depth, String subStr){
