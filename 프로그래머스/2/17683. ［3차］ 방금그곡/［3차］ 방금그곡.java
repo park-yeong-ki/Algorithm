@@ -21,7 +21,6 @@ class Solution {
             int j = 0;
             while(j < minute){ //구한 시간만큼 악보정보를 반복
                 sb.append(sArr[3].charAt(j % sArr[3].length())); //악보길이 초과시 처음부터 반복
-                if(sArr[3].charAt(j % sArr[3].length()) == '#') minute++;
                 j++;
             }
             
