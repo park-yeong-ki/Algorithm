@@ -66,7 +66,7 @@ class Solution {
         }
         
         for(int i=0; i<sort[idx].length; i++){
-            if(s[idx].equals(sort[idx][i]) || sort[idx][i] == "-"){ //조건에 부합하는 경우
+            if(s[idx].equals(sort[idx][i]) || sort[idx][i].equals("-")){ //조건에 부합하는 경우
                 dfs(idx+1, s, str+sort[idx][i]);
             }
         }
