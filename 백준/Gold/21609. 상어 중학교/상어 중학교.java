@@ -8,7 +8,6 @@ import java.util.StringTokenizer;
 public class Main {
     static int N, M, r, c, rb, total, score;
     static int[][] map, copyMap;
-    static int[] tArr;
     static boolean[][] visited;
     static class Point{
         int r, c;
@@ -171,15 +170,10 @@ public class Main {
 
     static void rotate() {
         copyMap = new int[N][N]; //회전 배열을 저장할 배열
-        tArr = new int[N]; //행을 저장
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                tArr[j] = map[i][j];
-            }
-
-            for (int j = 0; j < N; j++) {
-                copyMap[N - 1 - j][i] = tArr[j];
+                copyMap[N - 1 - j][i] = map[i][j];
             }
         }
 
