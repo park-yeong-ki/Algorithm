@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -50,16 +52,18 @@ public class Main {
 
                 if (min == M){
                     tN -= num;
-                    while (tN <= 0){
+                    if (tN <= 0){
+                        tN %= N;
                         tN += N;
                     }
                 }else {
                     tM -= num;
-                    while (tM <= 0){
+                    if (tM <= 0){
+                        tM %= M;
                         tM += M;
                     }
                 }
-
+                
                 idx++;
             }
 
