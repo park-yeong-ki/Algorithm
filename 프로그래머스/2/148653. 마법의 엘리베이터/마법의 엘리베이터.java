@@ -27,9 +27,16 @@ class Solution {
         int num = str.charAt(depth) - '0'; //현재 자리수
         if(flag){ //만약 이전 버튼을 더해서 0으로 만든 경우
             num = num+1;
+            if(num == 10){ //자리수가 넘어가는 경우
+                dfs(depth+1, cnt, true);
+            }else{
+                dfs(depth+1, cnt + (10 - num), true);//자리 버튼을 더해서 0으로 만드는 경우 -> 다음 자리수 +1
+                dfs(depth+1, cnt + num, false);//자리 버튼을 빼서 0으로 만드는 경우
+            }
+        }else{
+            dfs(depth+1, cnt + (10 - num), true);//자리 버튼을 더해서 0으로 만드는 경우 -> 다음 자리수 +1
+            dfs(depth+1, cnt + num, false);//자리 버튼을 빼서 0으로 만드는 경우
         }
         
-        dfs(depth+1, cnt + (10 - num), true);//자리 버튼을 더해서 0으로 만드는 경우 -> 다음 자리수 +1
-        dfs(depth+1, cnt + num, false);//자리 버튼을 빼서 0으로 만드는 경우
     }
 }
