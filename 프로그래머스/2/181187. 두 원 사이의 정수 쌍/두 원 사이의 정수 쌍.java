@@ -9,7 +9,7 @@ class Solution {
         long sum1 = 0;
         for(int i=0; i<r1; i++){
             double y = Math.sqrt(Math.pow(r1, 2) - Math.pow(i, 2)); 
-            if(y == (int)y && y >= 1) y -= 1; //원 위의 점은 제외
+            if(y == (int)y) y -= 1; //원 위의 점은 제외
             int maxY = (int) y;
             sum1 += maxY;
         }
