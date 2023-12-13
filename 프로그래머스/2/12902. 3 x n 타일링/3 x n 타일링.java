@@ -8,8 +8,8 @@ class Solution {
         int num = 1000000007;
         for(int i=3; i<=n; i++){
             if(i % 2 == 0){ //홀수인 경우만 방법 존재
-                s = (int)(((long)s + dp[i-4]) % num); //세로로 놓여있는 직사각형 하나를 눕히는 경우의 수
-                dp[i] = (int)((dp[i-2] * 3L + s * 2L) % num); 
+                s = (int)((s + dp[i-4] * 2L) % num); //세로로 놓여있는 직사각형 하나를 눕히는 경우의 수
+                dp[i] = (int)((dp[i-2] * 3L + s) % num); 
             }
         }
         
