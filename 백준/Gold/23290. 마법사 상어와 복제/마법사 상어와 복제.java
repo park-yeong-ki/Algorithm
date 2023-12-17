@@ -55,8 +55,9 @@ public class Main {
     static void setFish() {
         for (int i = 1; i <= 4; i++) {
             for (int j = 1; j <= 4; j++) {
-                for (int k = 0; k < map[i][j].size(); k++) {
+                for (int k = map[i][j].size()-1; k >= 0; k--) {
                     if (map[i][j].get(k).isMove) map[i][j].get(k).isMove = false;
+                    else break;
                 }
             }
         }
