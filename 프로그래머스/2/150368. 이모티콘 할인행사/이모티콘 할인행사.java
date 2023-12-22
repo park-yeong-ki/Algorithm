@@ -1,59 +1,60 @@
-import java.util.*;
-
 class Solution {
-    static int[] sale = {10, 20, 30, 40}; //지정된 할인율
-    static int[] pArr, price;
-    static int m, mPlus, mSum;
-    static int[][] arr;
+    static int[] sale = {10, 20, 30, 40};
+    static int[] arr;
+    static int[] ans;
     
     public int[] solution(int[][] users, int[] emoticons) {
-        arr = users;
-        price = emoticons;
-        m = emoticons.length;
-        mPlus = 0;
-        mSum = 0;
-        //m개의 이모티콘별 할인율 중복순열 생성
-        pArr = new int[m];
-        perm(0);
+        ans = new int[2];
+        arr = new int[emoticons.length];
+        comb(0, users, emoticons);
         
-        return new int[]{mPlus, mSum};
+        return ans;
     }
     
-    static void perm(int idx){
-        if(idx == m){            
-            int pCnt = 0; //플러스 가입자수
-            int tSum = 0; //총 구매 가격
-            //중복순열별 플러스 서비스 가입자수와 이모티콘 판매액수 확인
-            for(int i=0; i<arr.length; i++){
-                int sum = 0; //구매한 이모티콘 액수
-                for(int j=0; j<pArr.length; j++){
-                    if(arr[i][0] <= pArr[j]){ //회원이 이모티콘을 구매하는 경우
-                        sum += price[j] * ((100 - pArr[j]) / (double)100);
-                    }
-                }
-                
-                if(sum >= arr[i][1]){ //구매비용이 일정가격 이상이 되어 이모티콘 플러스를 가입하는 경우
-                    pCnt++;
-                }else{ //구매하는 경우
-                    tSum += sum;
+    static void calculate(int[][] users, int[] emoticons){
+        int sCnt = 0;
+        int tPrice = 0;
+        for(int i=0; i<users.length; i++){
+            int rate = users[i][0];
+            int limit = users[i][1];
+            int sum = 0;
+            
+            for(int j=0; j<emoticons.length; j++){
+                if(arr[j] >= rate){ //이모티콘 구매
+                    sum += emoticons[j] * ((100 - arr[j]) / (double)100);
                 }
             }
-                        
-            if(mPlus < pCnt){ //이모티콘 플러스 가입자수와 구매액수 모두 갱신되는 경우
-                mPlus = pCnt;
-                mSum = tSum;
-            }else if(mPlus == pCnt){ //구매액수만 갱신되는 경우
-                if(mSum < tSum){ 
-                    mSum = tSum;
-                }
+            
+            if(sum >= limit){ //구매 비용을 넘어서는 경우
+                sCnt++;
+            }else{
+                tPrice += sum;
             }
-                        
+        }
+        
+        updateAns(sCnt, tPrice);
+    }
+    
+    static void updateAns(int sCnt, int tPrice){
+        if(ans[0] < sCnt){ //서비스 가입자 갱신
+            ans[0] = sCnt;
+            ans[1] = tPrice;
+        }else if(ans[0] == sCnt){ //서비스 가입자가 같으면 판매액 갱신
+            if(ans[1] < tPrice){
+                ans[1] = tPrice;
+            }
+        }
+    }
+    
+    static void comb(int cnt, int[][] users, int[] emoticons){
+        if(cnt == emoticons.length){ //이모티콘별 할인율 조합 완성
+            calculate(users, emoticons);
             return;
         }
         
         for(int i=0; i<sale.length; i++){
-            pArr[idx] = sale[i];
-            perm(idx+1);
+            arr[cnt] = sale[i];
+            comb(cnt+1, users, emoticons);
         }
     }
 }
