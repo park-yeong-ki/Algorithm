@@ -4,41 +4,37 @@ class Solution {
     public int solution(int[] queue1, int[] queue2) {
         Queue<Integer> q1 = new ArrayDeque<>();
         Queue<Integer> q2 = new ArrayDeque<>();
+        long s1 = 0;
+        long s2 = 0;
+        int len = queue1.length;
         
-        long sum1 = 0;
-        long sum2 = 0;
-        for(int i=0; i<queue1.length; i++){
+        for(int i=0; i<len; i++){
             q1.add(queue1[i]);
-            sum1 += queue1[i];
-            
-            q2.add(queue2[i]);
-            sum2 += queue2[i];
+            s1 += queue1[i];
         }
         
-        if((sum1 + sum2) % 2 == 1) return -1; //홀수인 경우 만들 수 없다.
-        
+        for(int i=0; i<len; i++){
+            q2.add(queue2[i]);
+            s2 += queue2[i];
+        }
         
         int cnt = 0;
-        while(true){
-            if(cnt > queue1.length * 4){
-                return -1;
-            }
-            
-            if(sum1 > sum2){
-                int num1 = q1.poll();
-                sum1 -= num1;
-                q2.add(num1);
-                sum2 += num1;
-            }else if(sum1 < sum2){
-                int num2 = q2.poll();
-                sum2 -= num2;
-                q1.add(num2);
-                sum1 += num2;
-            }else{
-                return cnt;
-            }
+        while(cnt < 4*len){
+            if(s1 < s2){
+                int n = q2.poll();
+                s2 -= n;
+                q1.add(n);
+                s1 += n;
+            }else if(s1 > s2){
+                int n = q1.poll();
+                s1 -= n;
+                q2.add(n);
+                s2 += n;
+            }else break;
             
             cnt++;
         }
+        
+        return cnt == 4*len ? -1 : cnt;
     }
 }
