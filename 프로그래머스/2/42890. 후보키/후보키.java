@@ -1,73 +1,68 @@
 import java.util.*;
-import java.lang.*;
 
 class Solution {
     static int num, row, col;
-    static String[][] arr;
-    static List<String> ans;
-    
+    static String[][] sRelation;
+    static List<Integer> keys;
     public int solution(String[][] relation) {
-        arr = relation;
-        row = relation.length;
         col = relation[0].length;
-                
-        ans = new ArrayList<>(); //완성된 후보키 저장
-        //조합
-        num = 1;
-        while(num <= col){
-            comb(0, 0, "");
-            num++;
+        row = relation.length;
+        sRelation = relation;
+        
+        keys = new ArrayList<>();
+        for(int i=1; i<=col; i++){
+            num = i;
+            comb(0, 0, 0);
         }
         
-        return ans.size();
+        return keys.size();
     }
     
+    static boolean isUnique(int key){
+        StringBuilder sb = new StringBuilder();
+        Set<String> set = new HashSet<>();
+        for(int i=0; i<sRelation.length; i++){
+            for(int j=0; j<col; j++){
+                if((key & 1<<j) != 0){
+                    sb.append(sRelation[i][j]);
+                }
+            }
+            
+            if(set.contains(sb.toString())) return false;
+            set.add(sb.toString());
+            sb.setLength(0);
+        }
+        
+        return true;
+    }
     
-    static void comb(int cnt, int start, String str){
-        if(cnt == num){
-            System.out.println(str);
-            for(int i=0; i<ans.size(); i++){
-                int count = 0;
-                for(int j=0; j<ans.get(i).length(); j++){
-                    if(str.contains(String.valueOf(ans.get(i).charAt(j)))){
-                        count++;
-                    }
-                }
-                if(count == ans.get(i).length()){
-                    return;
+    static boolean isMinimal(int key){
+        for(int cKey : keys){
+            int min = 0;
+            for(int i=0; i<col; i++){
+                if((cKey & (1<<i)) != 0 && (key & (1<<i)) != 0){
+                    min |= 1<<i;
                 }
             }
             
-            
-            StringBuilder sb = new StringBuilder();
-            Set<String> set = new HashSet<>();
-            boolean flag = true;
-            
-            outer:
-            for(int i=0; i<row; i++){
-                for(int j=0; j<num; j++){
-                    sb.append(arr[i][str.charAt(j)-'0']);
-                }
-                
-                if(set.contains(sb.toString())){
-                    flag = false;
-                    break outer;
-                }else{
-                    set.add(sb.toString());
-                    sb.setLength(0);
-                }
-            }
-            
-            if(flag){ //후보키인 경우
-                ans.add(str); //후보키 저장
-                System.out.println("성공");
+            if(cKey == min) return false;
+        }
+        
+        return true;
+    }
+    
+    static void comb(int start, int cnt, int key){
+        if(num == cnt){
+            if(isUnique(key) && isMinimal(key)){
+                keys.add(key);
             }
             
             return;
         }
         
         for(int i=start; i<col; i++){
-            comb(cnt+1, i+1, str+i);
+            comb(i+1, cnt+1, key | (1<<i));
         }
     }
+    
 }
