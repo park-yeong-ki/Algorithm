@@ -1,41 +1,33 @@
 import java.util.*;
 
 class Solution {
-    public int solution(int N, int number) {
-        Set<Integer>[] dp = new Set[9];
+    public int solution(int N, int number) {        
+        Set<Integer>[] numbers = new Set[9];
         for(int i=1; i<=8; i++){
-            dp[i] = new HashSet<>();
+            numbers[i] = new HashSet<>();
         }
-        
-        StringBuilder sb = new StringBuilder();
-        int ans = -1;
-        List<Integer> temp1, temp2;
+                
+        int num = N;
         for(int i=1; i<=8; i++){
-            dp[i].add(0);
             for(int j=1; j<=i-1; j++){
-                temp1 = new ArrayList<>(dp[i-j]);
-                temp2 = new ArrayList<>(dp[j]);
-                for(int k=0; k<temp1.size(); k++){
-                    for(int l=0; l<temp2.size(); l++){
-                        dp[i].add(temp1.get(k) + temp2.get(l));
-                        dp[i].add(temp1.get(k) - temp2.get(l));
-                        dp[i].add(temp1.get(k) * temp2.get(l));
-                        dp[i].add(temp1.get(k) / temp2.get(l));
+                for(int n1 : numbers[j]){
+                    for(int n2 : numbers[i-j]){
+                        numbers[i].add(n1 + n2);
+                        numbers[i].add(n1 - n2);
+                        numbers[i].add(n1 * n2);
+                        numbers[i].add(n1 / n2);
                     }
                 }
-            }    
-            dp[i].remove(0);
-            
-            sb.append(N);
-            dp[i].add(Integer.valueOf(sb.toString()));
-            
-            if(dp[i].contains(number)){
-                ans = i;
-                break;
             }
+            
+            numbers[i].remove(0);
+            numbers[i].add(num);
+            
+            if(numbers[i].contains(number)) return i;
+            
+            num = num * 10 + N;
         }
-     
-        return ans;
+        
+        return -1;
     }
-    
 }
