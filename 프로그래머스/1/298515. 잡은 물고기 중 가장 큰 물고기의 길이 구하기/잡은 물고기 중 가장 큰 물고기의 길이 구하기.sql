@@ -1,0 +1,3 @@
+#가장 큰 물고기 길이에 cm 붙이기
+SELECT CONCAT(MAX(LENGTH),'cm')  AS MAX_LENGTH
+FROM FISH_INFO;
